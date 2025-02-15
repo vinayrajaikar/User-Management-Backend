@@ -15,7 +15,7 @@
   },
   "name": "server",
   "version": "1.0.0",
-  "description": "Backend for FarmEase",
+  "description": "Backend for User Management Api",
   "type": "module",
   "main": "index.js",
   "scripts": {
