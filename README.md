@@ -10,6 +10,23 @@ The **User Management API** is a **RESTful API** built with **Node.js, Express, 
 ✅ **Input Validation & Error Handling**  
 
 ---
+## How to Run the Project
+
+Follow these steps to set up and run the project locally:
+
+# Clone the repository
+git clone <repository-url>
+
+# Navigate to the project directory
+cd <project-folder>
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+
+---
 
 ##  API Endpoints  
 
