@@ -72,3 +72,93 @@ export const login = asyncHandler(async(req,res)=>{
             new ApiResponse(200, loggedInUser, "User logged in successfully")
         )
 })
+
+export const logout = asyncHandler(async(req,res)=>{
+    return res
+    .status(200)
+    .clearCookie("accessToken",{
+        httpOnly: true,
+        secure: true
+    })
+    .json(new ApiResponse(200,{},"User logged out successfully"))
+})
+
+export const  getAllUsers = asyncHandler(async(req,res)=>{
+    const users = await User.find().select("-password -role");
+
+    if(!users){
+        throw new ApiError(404,"No users found");
+    }
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(200, users, "Users fetched successfully")
+        )
+})
+
+export const getUser = asyncHandler(async(req,res)=>{
+    const {id} = req.params;
+
+    const user = await User.findById(id).select("-password -role");
+
+    if(!user){
+        throw new ApiError(404,"User not found");
+    }
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(200, user, "User fetched successfully")
+        )
+})
+
+export const updateUser = asyncHandler(async(req,res)=>{
+    const {id} = req.params;
+    const {name,email,password,role} = req.body;
+
+    const user = await User.findByIdAndUpdate(id,
+        {
+            name,
+            email,
+            role
+        },
+        {
+            new: true
+        }
+    );
+
+    if(!user){
+        throw new ApiError(404,"User not found");
+    }
+
+    if(password){
+        user.password = password
+        await user.save({validateBeforeSave: false})
+    }
+    
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(200, user, "User updated successfully")
+        )
+})
+
+export const deleteUser = asyncHandler(async(req,res)=>{
+
+    if(req.user.role != "admin"){
+        throw new ApiError(401,"Unauthorized request");
+    }
+
+    const {id} = req.params;
+
+    const user = await User.findByIdAndDelete(id);
+
+    if(!user){
+        throw new ApiError(404,"User not found");
+    }
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200,{}, "User deleted successfully"))
+})
