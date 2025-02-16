@@ -1,7 +1,7 @@
 # User-Management-Backend
 The **User Management API** is a **RESTful API** built with **Node.js, Express, and MongoDB** to handle **user authentication, authorization, and CRUD operations**. It provides **secure user management with JWT-based authentication** and **role-based access control (RBAC)**.
 
-## 📌 Features  
+## Features  
 ✅ **User Authentication (JWT-Based)**  
 ✅ **User Registration (Signup & Login)**  
 ✅ **Protected Routes (Require JWT Token)**  
@@ -30,7 +30,7 @@ npm run dev
 
 ##  API Endpoints  
 
-###  **Authentication Routes**  
+### 🔐 **Authentication Routes**  
 | Method | Endpoint              | Description |
 |--------|----------------------|-------------|
 | **POST** | `/api/auth/signup`  | Register a new user. |
